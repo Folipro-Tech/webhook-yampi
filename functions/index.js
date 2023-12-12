@@ -25,6 +25,7 @@ exports.saveAll = onRequest(async (request, response) => {
     await admin.firestore().collection('orders').add(request.body);
     return response.send("All good");
   } catch (error) {
+    await admin.firestore().collection('errors').add(error);
     return response.send(JSON.stringify(error));
   }
 });
